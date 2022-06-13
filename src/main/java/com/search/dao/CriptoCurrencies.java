@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
-public class CryptoCurrencies {
+public class CriptoCurrencies {
 
     public String id;
     public String name;
@@ -37,10 +37,10 @@ public class CryptoCurrencies {
     public Double takerDiscountPercentage;
 
 
-    public CryptoCurrencies() {
+    public CriptoCurrencies() {
     }
 
-    public CryptoCurrencies(String id, String name, String base_currency, String quote_currency, List<MinimumOrderAmount> minimum_order_amount, boolean disabled, boolean illiquid, String rpoDisabled, Double takerFee, Double makerFee, Double maxOrdersPerMinute, Double makerDiscountPercentage, Double takerDiscountPercentage) {
+    public CriptoCurrencies(String id, String name, String base_currency, String quote_currency, List<MinimumOrderAmount> minimum_order_amount, boolean disabled, boolean illiquid, String rpoDisabled, Double takerFee, Double makerFee, Double maxOrdersPerMinute, Double makerDiscountPercentage, Double takerDiscountPercentage) {
         this.id = id;
         this.name = name;
         this.base_currency = base_currency;
@@ -164,7 +164,7 @@ public class CryptoCurrencies {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CryptoCurrencies that = (CryptoCurrencies) o;
+        CriptoCurrencies that = (CriptoCurrencies) o;
         return disabled == that.disabled && illiquid == that.illiquid && Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(base_currency, that.base_currency) && Objects.equals(quote_currency, that.quote_currency) && Objects.equals(minimum_order_amount, that.minimum_order_amount) && Objects.equals(rpoDisabled, that.rpoDisabled) && Objects.equals(takerFee, that.takerFee) && Objects.equals(makerFee, that.makerFee) && Objects.equals(maxOrdersPerMinute, that.maxOrdersPerMinute) && Objects.equals(makerDiscountPercentage, that.makerDiscountPercentage) && Objects.equals(takerDiscountPercentage, that.takerDiscountPercentage);
     }
 
