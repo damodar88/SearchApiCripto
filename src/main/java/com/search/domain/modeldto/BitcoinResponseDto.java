@@ -1,4 +1,4 @@
-package com.search.domain.modelDto;
+package com.search.domain.modeldto;
 
 public class BitcoinResponseDto {
     private double usd;

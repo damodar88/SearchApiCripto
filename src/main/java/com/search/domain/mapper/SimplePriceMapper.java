@@ -1,8 +1,10 @@
 package com.search.domain.mapper;
 
-import com.search.domain.modelDto.BitcoinResponseDto;
-import com.search.gateway.coingeckoSupportedurrenciesImpl.model.CoingeckoSimplePriceResponse;
+import com.search.domain.modeldto.BitcoinResponseDto;
+import com.search.gateway.coingeckosupportedurrenciesimpl.model.CoingeckoSimplePriceResponse;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SimplePriceMapper {
 
 

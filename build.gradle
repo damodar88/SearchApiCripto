@@ -27,7 +27,7 @@ dependencies {
 	implementation group: 'io.github.openfeign', name: 'feign-core', version: '10.6.0'
 	implementation group: 'io.github.openfeign', name: 'feign-gson', version: '10.6.0'
 
-
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
 }
 
 tasks.named('test') {

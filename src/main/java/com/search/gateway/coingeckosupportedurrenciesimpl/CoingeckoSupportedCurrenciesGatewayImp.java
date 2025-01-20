@@ -1,4 +1,4 @@
-package com.search.gateway.coingeckoSupportedurrenciesImpl;
+package com.search.gateway.coingeckosupportedurrenciesimpl;
 
 import com.search.gateway.CoingeckoSupportedurrenciesGateway;
 

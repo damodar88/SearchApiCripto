@@ -1,10 +1,12 @@
 package com.search.domain.usecase;
 
 import com.search.domain.mapper.SimplePriceMapper;
-import com.search.domain.modelDto.BitcoinResponseDto;
+import com.search.domain.modeldto.BitcoinResponseDto;
 import com.search.gateway.CoingeckoSimplePriceGateway;
-import com.search.gateway.coingeckoSupportedurrenciesImpl.model.CoingeckoSimplePriceResponse;
+import com.search.gateway.coingeckosupportedurrenciesimpl.model.CoingeckoSimplePriceResponse;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SimpleUseCase {
 
     private final CoingeckoSimplePriceGateway gateway;
@@ -17,9 +19,8 @@ public class SimpleUseCase {
     }
 
     public BitcoinResponseDto getSimplePrice(String id, String vsCurrencies) {
-        BitcoinResponseDto bitcoinResponseDto = new BitcoinResponseDto();
         CoingeckoSimplePriceResponse response = gateway.getSimplePrice(id, vsCurrencies);
-        return bitcoinResponseDto = mapper.coingeckoSimplePriceToSimpleUseCaseDto(response);
+        return  mapper.coingeckoSimplePriceToSimpleUseCaseDto(response);
     }
 
 

@@ -3,7 +3,7 @@ package com.search.api.delegate;
 import com.search.api.controller.CryptoController;
 import com.search.api.mapper.SimpleDelegateMapper;
 import com.search.api.model.SimplePriceResponse;
-import com.search.domain.modelDto.BitcoinResponseDto;
+import com.search.domain.modeldto.BitcoinResponseDto;
 import com.search.domain.usecase.SimpleUseCase;
 import org.springframework.stereotype.Component;
 
