@@ -1,4 +1,4 @@
-package com.search.api;
+package com.search.api.controller;
 
 import feign.Feign;
 import feign.gson.GsonDecoder;
