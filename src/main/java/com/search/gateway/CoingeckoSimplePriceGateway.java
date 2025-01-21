@@ -1,6 +1,6 @@
 package com.search.gateway;
 
-import com.search.gateway.coingeckosupportedurrenciesimpl.model.CoingeckoSimplePriceResponse;
+import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
 
 public interface CoingeckoSimplePriceGateway {
 

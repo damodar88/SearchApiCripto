@@ -3,7 +3,7 @@ package com.search.domain.usecase;
 import com.search.domain.mapper.SimplePriceMapper;
 import com.search.domain.modeldto.BitcoinResponseDto;
 import com.search.gateway.CoingeckoSimplePriceGateway;
-import com.search.gateway.coingeckosupportedurrenciesimpl.model.CoingeckoSimplePriceResponse;
+import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
 import org.springframework.stereotype.Service;
 
 @Service

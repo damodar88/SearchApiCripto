@@ -1,14 +1,26 @@
 package com.search.gateway.simplepricegatewayimpl;
 
 import com.search.gateway.CoingeckoSimplePriceGateway;
-import com.search.gateway.coingeckosupportedurrenciesimpl.model.CoingeckoSimplePriceResponse;
+import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 @Repository
 public class CoingeckoSimplePriceGatewayImpl implements CoingeckoSimplePriceGateway {
 
+    private final RestTemplate restTemplate;
+
+    @Value("${url.coingecko.simpleprice}")
+    private String urlCoingeckoSimplePrice;
+
+    public CoingeckoSimplePriceGatewayImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Override
     public CoingeckoSimplePriceResponse getSimplePrice(String id, String currency) {
-        return null;
+        String url = urlCoingeckoSimplePrice + "?ids=" + id + "&vs_currencies=" + currency;
+        return restTemplate.getForObject(url, CoingeckoSimplePriceResponse.class);
     }
 }

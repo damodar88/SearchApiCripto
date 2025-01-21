@@ -1,4 +1,4 @@
-package com.search.gateway.coingeckosupportedurrenciesimpl.model;
+package com.search.gateway.simplepricegatewayimpl.model.response;
 
 public class CoingeckoSimplePriceResponse {
     private double usd;

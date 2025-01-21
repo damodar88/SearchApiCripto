@@ -7,43 +7,83 @@ public class BitcoinResponseDto {
     private double usd24hChange;
     private long lastUpdatedAt;
 
-    public double getUsd() {
-        return usd;
+    // Constructor privado para evitar instanciación directa
+    private BitcoinResponseDto(Builder builder) {
+        this.usd = builder.usd;
+        this.usdMarketCap = builder.usdMarketCap;
+        this.usd24hVol = builder.usd24hVol;
+        this.usd24hChange = builder.usd24hChange;
+        this.lastUpdatedAt = builder.lastUpdatedAt;
     }
 
-    public void setUsd(double usd) {
-        this.usd = usd;
+    // Clase estática Builder
+    public static class Builder {
+        private double usd;
+        private double usdMarketCap;
+        private double usd24hVol;
+        private double usd24hChange;
+        private long lastUpdatedAt;
+
+        // Métodos setter para cada propiedad
+        public Builder usd(double usd) {
+            this.usd = usd;
+            return this; // Retorna el propio builder para permitir encadenamiento
+        }
+
+        public Builder usdMarketCap(double usdMarketCap) {
+            this.usdMarketCap = usdMarketCap;
+            return this;
+        }
+
+        public Builder usd24hVol(double usd24hVol) {
+            this.usd24hVol = usd24hVol;
+            return this;
+        }
+
+        public Builder usd24hChange(double usd24hChange) {
+            this.usd24hChange = usd24hChange;
+            return this;
+        }
+
+        public Builder lastUpdatedAt(long lastUpdatedAt) {
+            this.lastUpdatedAt = lastUpdatedAt;
+            return this;
+        }
+
+        public BitcoinResponseDto build() {
+            return new BitcoinResponseDto(this);
+        }
+    }
+
+    // Getters
+    public double getUsd() {
+        return usd;
     }
 
     public double getUsdMarketCap() {
         return usdMarketCap;
     }
 
-    public void setUsdMarketCap(double usdMarketCap) {
-        this.usdMarketCap = usdMarketCap;
-    }
-
     public double getUsd24hVol() {
         return usd24hVol;
-    }
-
-    public void setUsd24hVol(double usd24hVol) {
-        this.usd24hVol = usd24hVol;
     }
 
     public double getUsd24hChange() {
         return usd24hChange;
     }
 
-    public void setUsd24hChange(double usd24hChange) {
-        this.usd24hChange = usd24hChange;
-    }
-
     public long getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
-    public void setLastUpdatedAt(long lastUpdatedAt) {
-        this.lastUpdatedAt = lastUpdatedAt;
+    @Override
+    public String toString() {
+        return "BitcoinResponseDto{" +
+                "usd=" + usd +
+                ", usdMarketCap=" + usdMarketCap +
+                ", usd24hVol=" + usd24hVol +
+                ", usd24hChange=" + usd24hChange +
+                ", lastUpdatedAt=" + lastUpdatedAt +
+                '}';
     }
 }
