@@ -4,5 +4,5 @@ import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimpleP
 
 public interface CoingeckoSimplePriceGateway {
 
-    public CoingeckoSimplePriceResponse getSimplePrice(String id, String currency);
+    CoingeckoSimplePriceResponse getSimplePrice(String id, String currency);
 }

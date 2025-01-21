@@ -7,7 +7,6 @@ public class BitcoinResponseDto {
     private double usd24hChange;
     private long lastUpdatedAt;
 
-    // Constructor privado para evitar instanciación directa
     private BitcoinResponseDto(Builder builder) {
         this.usd = builder.usd;
         this.usdMarketCap = builder.usdMarketCap;
@@ -16,7 +15,6 @@ public class BitcoinResponseDto {
         this.lastUpdatedAt = builder.lastUpdatedAt;
     }
 
-    // Clase estática Builder
     public static class Builder {
         private double usd;
         private double usdMarketCap;
@@ -24,10 +22,9 @@ public class BitcoinResponseDto {
         private double usd24hChange;
         private long lastUpdatedAt;
 
-        // Métodos setter para cada propiedad
         public Builder usd(double usd) {
             this.usd = usd;
-            return this; // Retorna el propio builder para permitir encadenamiento
+            return this;
         }
 
         public Builder usdMarketCap(double usdMarketCap) {

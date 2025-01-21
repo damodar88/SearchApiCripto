@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class SimpleDelegateMapper {
 
     public SimplePriceResponse simpleDelegateToBitcoinResponseDtoMapper(BitcoinResponseDto bitcoinResponseDto) {
-        return new SimplePriceResponse();
+        return new SimplePriceResponse.Builder()
+                .usd(bitcoinResponseDto.getUsd())
+                .build();
     }
-
-
 }
