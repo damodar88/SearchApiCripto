@@ -24,7 +24,7 @@ public class SimpleDelegate implements CryptoController {
     }
 
     @Override
-    @GetMapping("/crypto/prices")
+    @GetMapping("/simple/price")
     public SimplePriceResponse getSimplePrice(@RequestParam String id, @RequestParam String vsCurrencies) {
         BitcoinResponseDto responseDto = useCase.getSimplePrice(id, vsCurrencies);
         return mapper.simpleDelegateToBitcoinResponseDtoMapper(responseDto);
