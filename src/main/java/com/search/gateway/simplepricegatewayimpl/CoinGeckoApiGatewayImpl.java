@@ -1,20 +1,20 @@
 package com.search.gateway.simplepricegatewayimpl;
 
-import com.search.gateway.CoingeckoSimplePriceGateway;
+import com.search.gateway.CoinGeckoApiGateway;
 import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 @Repository
-public class CoingeckoSimplePriceGatewayImpl implements CoingeckoSimplePriceGateway {
+public class CoinGeckoApiGatewayImpl implements CoinGeckoApiGateway {
 
     private final RestTemplate restTemplate;
 
     @Value("${url.coingecko.simpleprice}")
     private String urlCoingeckoSimplePrice;
 
-    public CoingeckoSimplePriceGatewayImpl(RestTemplate restTemplate) {
+    public CoinGeckoApiGatewayImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

@@ -4,12 +4,25 @@ public class SimplePriceResponse {
 
     private Bitcoin bitcoin;
 
-    public Bitcoin getBitcoin() {
+    private SimplePriceResponse(Builder build){
+        this.bitcoin = build.bitcoin;
+    }
+
+    public Bitcoin getBitcoin(){
         return bitcoin;
     }
 
-    public void setBitcoin(Bitcoin bitcoin) {
-        this.bitcoin = bitcoin;
+    public static class Builder{
+        private Bitcoin bitcoin;
+
+        public Builder bitcoin(Bitcoin bitcoin){
+            this.bitcoin = bitcoin;
+            return this;
+        }
+
+        public SimplePriceResponse build(){
+            return new SimplePriceResponse(this);
+        }
     }
 
 }

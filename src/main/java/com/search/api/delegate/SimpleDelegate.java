@@ -5,9 +5,13 @@ import com.search.api.mapper.SimpleDelegateMapper;
 import com.search.api.model.SimplePriceResponse;
 import com.search.domain.modeldto.BitcoinResponseDto;
 import com.search.domain.usecase.SimpleUseCase;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Component
+@Controller
+@RestController
 public class SimpleDelegate implements CryptoController {
 
     private final SimpleUseCase useCase;
@@ -20,7 +24,8 @@ public class SimpleDelegate implements CryptoController {
     }
 
     @Override
-    public SimplePriceResponse getSimplePrice(String id, String vsCurrencies) {
+    @GetMapping("/simple/price")
+    public SimplePriceResponse getSimplePrice(@RequestParam String id, @RequestParam String vsCurrencies) {
         BitcoinResponseDto responseDto = useCase.getSimplePrice(id, vsCurrencies);
         return mapper.simpleDelegateToBitcoinResponseDtoMapper(responseDto);
     }

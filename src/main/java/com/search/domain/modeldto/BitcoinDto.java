@@ -1,6 +1,6 @@
-package com.search.api.model;
+package com.search.domain.modeldto;
 
-public class Bitcoin {
+public class BitcoinDto {
 
     private double usd;
     private double usdMarketCap;
@@ -8,7 +8,7 @@ public class Bitcoin {
     private double usd24hChange;
     private long lastUpdatedAt;
 
-    private Bitcoin(Builder builder){
+    private BitcoinDto(Builder builder){
         this.usd = builder.usd;
         this.usdMarketCap = builder.usdMarketCap;
         this.usd24hVol = builder.usd24hVol;
@@ -16,28 +16,27 @@ public class Bitcoin {
         this.lastUpdatedAt = builder.lastUpdatedAt;
     }
 
-    public double getUsd(){
-        return usd;
-    }
-
-    public double getUsdMarketCap(){
-        return usdMarketCap;
-    }
-
-    public double getUsd24hVol(){
-        return usd24hVol;
-    }
-
-    public double getUsd24hChange(){
-        return usd24hChange;
-    }
-
-    public long getLastUpdatedAt(){
+    public long getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
-    public static class Builder{
+    public double getUsd24hChange() {
+        return usd24hChange;
+    }
 
+    public double getUsd24hVol() {
+        return usd24hVol;
+    }
+
+    public double getUsdMarketCap() {
+        return usdMarketCap;
+    }
+
+    public double getUsd() {
+        return usd;
+    }
+
+    public static class Builder{
         private double usd;
         private double usdMarketCap;
         private double usd24hVol;
@@ -48,7 +47,6 @@ public class Bitcoin {
             this.usd = usd;
             return this;
         }
-
         public Builder usdMarketCap(double usdMarketCap){
             this.usdMarketCap = usdMarketCap;
             return this;
@@ -69,8 +67,8 @@ public class Bitcoin {
             return this;
         }
 
-        public Bitcoin build(){
-            return new Bitcoin(this);
+        public BitcoinDto build(){
+            return new BitcoinDto(this);
         }
 
     }
