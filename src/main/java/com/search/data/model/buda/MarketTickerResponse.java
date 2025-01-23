@@ -1,4 +1,4 @@
-package com.search.gateway.budaapigatewayimpl.model.response;
+package com.search.data.model.buda;
 
 public class MarketTickerResponse {
 

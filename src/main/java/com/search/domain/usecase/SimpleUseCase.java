@@ -2,8 +2,8 @@ package com.search.domain.usecase;
 
 import com.search.domain.mapper.SimplePriceMapper;
 import com.search.domain.modeldto.BitcoinResponseDto;
-import com.search.gateway.CoinGeckoApiGateway;
-import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
+import com.search.data.gateway.CoinGeckoApiGateway;
+import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;
 import org.springframework.stereotype.Service;
 
 @Service
