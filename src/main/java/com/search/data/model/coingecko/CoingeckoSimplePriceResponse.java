@@ -1,4 +1,4 @@
-package com.search.gateway.simplepricegatewayimpl.model.response;
+package com.search.data.model.coingecko;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

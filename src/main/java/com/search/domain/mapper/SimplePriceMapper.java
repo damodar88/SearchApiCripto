@@ -2,7 +2,7 @@ package com.search.domain.mapper;
 
 import com.search.domain.modeldto.BitcoinDto;
 import com.search.domain.modeldto.BitcoinResponseDto;
-import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
+import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;
 import org.springframework.stereotype.Component;
 
 @Component

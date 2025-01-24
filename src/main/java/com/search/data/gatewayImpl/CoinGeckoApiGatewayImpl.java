@@ -1,7 +1,7 @@
-package com.search.gateway.simplepricegatewayimpl;
+package com.search.data.gatewayImpl;
 
-import com.search.gateway.CoinGeckoApiGateway;
-import com.search.gateway.simplepricegatewayimpl.model.response.CoingeckoSimplePriceResponse;
+import com.search.data.gateway.CoinGeckoApiGateway;
+import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
