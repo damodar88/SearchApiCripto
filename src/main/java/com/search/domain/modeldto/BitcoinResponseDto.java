@@ -1,7 +1,5 @@
 package com.search.domain.modeldto;
 
-import com.search.api.model.SimplePriceResponse;
-
 public class BitcoinResponseDto {
 
     private BitcoinDto bitcoin;

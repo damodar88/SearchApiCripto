@@ -1,4 +1,4 @@
-package com.search.data.gatewayImpl;
+package com.search.data.gatewayimpl;
 
 import com.search.data.gateway.CoinGeckoApiGateway;
 import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;

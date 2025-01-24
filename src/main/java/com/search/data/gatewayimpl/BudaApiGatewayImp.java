@@ -1,4 +1,4 @@
-package com.search.data.gatewayImpl;
+package com.search.data.gatewayimpl;
 
 import com.search.data.client.BudaApiClient;
 import com.search.data.gateway.BudaApiGateway;
