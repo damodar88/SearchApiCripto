@@ -1,7 +1,7 @@
 package com.search.data.client;
 
 
-import com.search.data.model.buda.MarketTickerResponse;
+import com.search.data.model.buda.CryptoPriceResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BudaApiClient {
 
     @GetMapping("/v2/markets/{market_id}/ticker")
-    MarketTickerResponse getMarketTicker(@PathVariable("market_id") String marketId);
+    CryptoPriceResponse getMarketTicker(@PathVariable("market_id") String marketId);
 
 }
