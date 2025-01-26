@@ -1,10 +1,10 @@
 package com.search.data.model.buda;
 
-public class MarketTickerResponse {
+public class CryptoPriceResponse {
 
     private Ticker ticker;
 
-    private MarketTickerResponse(Builder builder){
+    private CryptoPriceResponse(Builder builder){
         this.ticker = builder.ticker;
     }
 
@@ -21,8 +21,8 @@ public class MarketTickerResponse {
             return this;
         }
 
-        public MarketTickerResponse build(){
-            return new MarketTickerResponse(this);
+        public CryptoPriceResponse build(){
+            return new CryptoPriceResponse(this);
         }
     }
 }
