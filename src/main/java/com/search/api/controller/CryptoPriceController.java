@@ -1,9 +1,9 @@
 package com.search.api.controller;
 
-import com.search.api.model.SimplePriceResponse;
+import com.search.api.model.MarketPriceResponse;
 
 public interface CryptoPriceController {
 
-    SimplePriceResponse getBitcoinPriceFromCoingeckoo(String cryptoCurrency, String vsCurrencies);
+    MarketPriceResponse getBitcoinPriceFromCoingeckoo(String cryptoCurrency, String vsCurrencies);
 
 }
