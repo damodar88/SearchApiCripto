@@ -4,9 +4,9 @@ import java.util.List;
 
 public class CryptoMarketPriceDomainDTO {
 
-    private String cryptoId;
-    private String currency;
-    private List<MarketPriceDomainDTO> marketPrices;
+    private final String cryptoId;
+    private final String currency;
+    private final List<MarketPriceDomainDTO> marketPrices;
 
     private CryptoMarketPriceDomainDTO(Builder builder){
         this.cryptoId = builder.cryptoId;
@@ -50,6 +50,5 @@ public class CryptoMarketPriceDomainDTO {
             return new CryptoMarketPriceDomainDTO(this);
         }
     }
-
-
 }
+ss

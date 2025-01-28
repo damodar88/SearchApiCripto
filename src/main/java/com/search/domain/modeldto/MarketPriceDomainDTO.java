@@ -2,9 +2,9 @@ package com.search.domain.modeldto;
 
 public class MarketPriceDomainDTO {
 
-    private String platform;
-    private Double price;
-    private String timestamp;
+    private final String platform;
+    private final Double price;
+    private final String timestamp;
 
 
     private MarketPriceDomainDTO(Builder build){
@@ -49,5 +49,4 @@ public class MarketPriceDomainDTO {
             return new MarketPriceDomainDTO(this);
         }
     }
-
 }
