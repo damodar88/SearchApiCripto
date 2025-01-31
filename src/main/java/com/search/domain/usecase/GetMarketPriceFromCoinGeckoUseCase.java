@@ -3,7 +3,7 @@ package com.search.domain.usecase;
 import com.search.domain.mapper.CoinGeckoMarketPriceMapper;
 import com.search.domain.modeldto.CryptoMarketPriceDomainDTO;
 import com.search.data.gateway.CoinGeckoApiGateway;
-import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;
+import com.search.data.model.coingecko.CoinGeckoCryptoResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +18,8 @@ public class GetMarketPriceFromCoinGeckoUseCase {
         this.mapper = mapper;
     }
 
-    public CryptoMarketPriceDomainDTO getBitcoinPrice(String id, String vsCurrencies) {
-        CoingeckoSimplePriceResponse response = gateway.getSimplePrice(id, vsCurrencies);
-        return  mapper.mapCoinGeckoBitcoinToDto(response);
+    public CryptoMarketPriceDomainDTO getBitcoinPrice(String cryptoCurrency, String selectedCurrency) {
+        CoinGeckoCryptoResponse response = gateway.getSimplePrice(cryptoCurrency, selectedCurrency);
+        return  mapper.mapCoinGeckoBitcoinToDto(response,cryptoCurrency);
     }
 }
