@@ -1,6 +1,6 @@
 package com.search.data.model.coingecko;
 
-public class BitcoinModel {
+public class CryptoModel {
 
     private double usd;
     private double usdMarketCap;

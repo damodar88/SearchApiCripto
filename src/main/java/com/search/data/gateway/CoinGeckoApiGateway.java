@@ -1,8 +1,8 @@
 package com.search.data.gateway;
 
-import com.search.data.model.coingecko.CoingeckoSimplePriceResponse;
+import com.search.data.model.coingecko.CoinGeckoCryptoResponse;
 
 public interface CoinGeckoApiGateway {
 
-    CoingeckoSimplePriceResponse getSimplePrice(String id, String currency);
+    CoinGeckoCryptoResponse getSimplePrice(String id, String currency);
 }
