@@ -1,6 +1,7 @@
 package com.search.domain.mapper;
 
-import com.search.data.model.coingecko.CryptoModel;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.search.data.model.coingecko.CryptoPriceModel;
 import com.search.domain.modeldto.CryptoMarketPriceDomainDTO;
 import com.search.data.model.coingecko.CoinGeckoCryptoResponse;
 import com.search.domain.modeldto.MarketPriceDomainDTO;
@@ -9,42 +10,52 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
 public class CoinGeckoMarketPriceMapper {
 
-    private static final String PLATFORM_NAME = "CoinGecko";
-    private static final DateTimeFormatter TIMESTAMP_FORMATTER =  DateTimeFormatter.ISO_INSTANT.withZone(ZoneOffset.UTC);
 
-    public CryptoMarketPriceDomainDTO mapCoinGeckoBitcoinToDto(CoinGeckoCryptoResponse response) {
-        if (response == null || response.getCryptos().isEmpty()) {
-            return null;
+    private static final String PLATFORM_NAME = "CoinGecko";
+    private static final DateTimeFormatter TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ISO_INSTANT.withZone(ZoneOffset.UTC);
+
+    public CryptoMarketPriceDomainDTO mapCoinGeckoBitcoinToDto(CoinGeckoCryptoResponse response, String cryptoCurrency, String selectedCurrency) {
+
+        // Extraer los datos de la criptomoneda desde la respuesta
+        CryptoPriceModel cryptoData = response.getCryptos().get(cryptoCurrency);
+        if (cryptoData == null) {
+            throw new IllegalArgumentException("No se encontraron datos para la criptomoneda: " + cryptoCurrency);
         }
 
-        Map.Entry<String, CryptoModel> entry = response.getCryptos().entrySet().iterator().next();
-        CryptoModel cryptoModel = entry.getValue();
+        // Obtener el precio en la moneda seleccionada
+        Double price = cryptoData.getPrices().get(selectedCurrency);
+        if (price == null) {
+            throw new IllegalArgumentException("No se encontró precio para la moneda: " + selectedCurrency);
+        }
 
+        // Obtener la marca de tiempo y convertirla a formato ISO
+        long timestampEpoch = cryptoData.getLastUpdatedAt();
+        String timestamp = timestampEpoch > 0
+                ? TIMESTAMP_FORMATTER.format(Instant.ofEpochSecond(timestampEpoch))
+                : "N/A";
+
+        // Crear lista de precios de mercado
+        List<MarketPriceDomainDTO> marketPrices = Collections.singletonList(
+                new MarketPriceDomainDTO.Builder()
+                        .platform(PLATFORM_NAME)
+                        .price(price)
+                        .timestamp(timestamp)
+                        .build()
+        );
+
+        // Construir el DTO intermedio
         return new CryptoMarketPriceDomainDTO.Builder()
-                .withCryptoId(entry.getKey())
-                .withCurrency(String.valueOf(cryptoModel.getUsd()))
-                .withMarketPrices(Collections.singletonList(
-                        new MarketPriceDomainDTO.Builder()
-                                .withPlatform(PLATFORM_NAME)
-                                .withPrice(cryptoModel.getUsd())
-                                .withTimestamp(formatTimestamp(cryptoModel.getLastUpdatedAt()))
-                                .build()
-                ))
+                .cryptoId(cryptoCurrency)
+                .currency(selectedCurrency)
+                .marketPrices(marketPrices)
                 .build();
     }
 
-    private String formatTimestamp(long epochSeconds) {
-        return Instant.ofEpochSecond(epochSeconds)
-                .atOffset(ZoneOffset.UTC)
-                .format(TIMESTAMP_FORMATTER);
-    }
 }

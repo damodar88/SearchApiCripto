@@ -20,6 +20,6 @@ public class GetMarketPriceFromCoinGeckoUseCase {
 
     public CryptoMarketPriceDomainDTO getBitcoinPrice(String cryptoCurrency, String selectedCurrency) {
         CoinGeckoCryptoResponse response = gateway.getSimplePrice(cryptoCurrency, selectedCurrency);
-        return  mapper.mapCoinGeckoBitcoinToDto(response,cryptoCurrency);
+        return mapper.mapCoinGeckoBitcoinToDto(response, cryptoCurrency, selectedCurrency);
     }
 }
