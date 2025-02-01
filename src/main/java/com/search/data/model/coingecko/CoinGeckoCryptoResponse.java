@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CoinGeckoCryptoResponse {
-    private final Map<String, CryptoModel> cryptos = new HashMap<>();
+    private final Map<String, CryptoPriceModel> cryptos = new HashMap<>();
 
     @JsonAnySetter
-    public void addCrypto(String name, CryptoModel crypto) {
-        cryptos.put(name, crypto);
+    public void addCrypto(String cryptoName, CryptoPriceModel data) {
+        cryptos.put(cryptoName, data);
     }
 
-    public Map<String, CryptoModel> getCryptos() {
+    public Map<String, CryptoPriceModel> getCryptos() {
         return cryptos;
     }
 }
