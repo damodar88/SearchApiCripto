@@ -1,6 +1,7 @@
 package com.search.domain.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.search.common.exception.MapperException;
 import com.search.data.model.coingecko.CryptoPriceModel;
 import com.search.domain.modeldto.CryptoMarketPriceDomainDTO;
 import com.search.data.model.coingecko.CoinGeckoCryptoResponse;
@@ -11,7 +12,11 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
+
+import static com.search.common.constants.ErrorMessages.CRYPTO_NOT_FOUND;
+import static com.search.common.constants.ErrorMessages.PRICE_NOT_FOUND;
 
 @Component
 public class CoinGeckoMarketPriceMapper {
@@ -23,38 +28,29 @@ public class CoinGeckoMarketPriceMapper {
 
     public CryptoMarketPriceDomainDTO mapCoinGeckoBitcoinToDto(CoinGeckoCryptoResponse response, String cryptoCurrency, String selectedCurrency) {
 
-        // Extraer los datos de la criptomoneda desde la respuesta
-        CryptoPriceModel cryptoData = response.getCryptos().get(cryptoCurrency);
-        if (cryptoData == null) {
-            throw new IllegalArgumentException("No se encontraron datos para la criptomoneda: " + cryptoCurrency);
-        }
+        CryptoPriceModel cryptoData = Optional.ofNullable(response.getCryptos().get(cryptoCurrency))
+                .orElseThrow(() -> new MapperException(CRYPTO_NOT_FOUND + cryptoCurrency));
 
-        // Obtener el precio en la moneda seleccionada
-        Double price = cryptoData.getPrices().get(selectedCurrency);
-        if (price == null) {
-            throw new IllegalArgumentException("No se encontró precio para la moneda: " + selectedCurrency);
-        }
+        Double price = Optional.ofNullable(cryptoData.getPrices().get(selectedCurrency))
+                .orElseThrow(() -> new MapperException(PRICE_NOT_FOUND + selectedCurrency));
 
-        // Obtener la marca de tiempo y convertirla a formato ISO
         long timestampEpoch = cryptoData.getLastUpdatedAt();
         String timestamp = timestampEpoch > 0
                 ? TIMESTAMP_FORMATTER.format(Instant.ofEpochSecond(timestampEpoch))
                 : "N/A";
 
-        // Crear lista de precios de mercado
         List<MarketPriceDomainDTO> marketPrices = Collections.singletonList(
                 new MarketPriceDomainDTO.Builder()
-                        .platform(PLATFORM_NAME)
-                        .price(price)
-                        .timestamp(timestamp)
+                        .withPlatform(PLATFORM_NAME)
+                        .withPrice(price)
+                        .withTimestamp(timestamp)
                         .build()
         );
 
-        // Construir el DTO intermedio
         return new CryptoMarketPriceDomainDTO.Builder()
-                .cryptoId(cryptoCurrency)
-                .currency(selectedCurrency)
-                .marketPrices(marketPrices)
+                .withCryptoId(cryptoCurrency)
+                .withCurrency(selectedCurrency)
+                .withMarketPrices(marketPrices)
                 .build();
     }
 
