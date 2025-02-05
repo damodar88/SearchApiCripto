@@ -44,7 +44,17 @@ public class PlatformPrice {
             return this;
         }
 
-        public PlatformPrice build(){
+        public PlatformPrice build() {
+            if (platform == null || platform.trim().isEmpty()) {
+                throw new IllegalArgumentException("⚠️ El campo 'platform' es obligatorio.");
+            }
+            if (price == null || price < 0) {
+                throw new IllegalArgumentException("⚠️ El 'price' no puede ser nulo ni negativo.");
+            }
+            if (timestamp == null || timestamp.trim().isEmpty()) {
+                throw new IllegalArgumentException("⚠️ El 'timestamp' no puede estar vacío.");
+            }
+
             return new PlatformPrice(this);
         }
     }
