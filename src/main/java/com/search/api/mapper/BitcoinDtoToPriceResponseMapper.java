@@ -21,7 +21,7 @@ public class BitcoinDtoToPriceResponseMapper {
         MarketPriceResponse coinGeckoResponse =mapGeckoDtoToPlatformPrices(responseGeckoDto);
 
 
-        ;
+        return null;
     }
 
 
@@ -37,7 +37,6 @@ public class BitcoinDtoToPriceResponseMapper {
                         .timestamp(marketGeckoPricesDTO.getTimestamp())
                         .build())
                 .collect(Collectors.toList());
-
 
         return new MarketPriceResponse.Builder()
                 .cryptoId(responseGeckoDto.getCryptoId())
