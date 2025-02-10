@@ -9,25 +9,35 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Component
 public class BitcoinDtoToPriceResponseMapper {
 
     public MarketPriceResponse simpleDelegateToBitcoinResponseDtoMapper(CryptoMarketPriceDomainDTO responseGeckoDto, CryptoMarketPriceDomainDTO responseBudaDto) {
 
+        MarketPriceResponse coinGeckoResponse =mapGeckoDtoToPlatformPrices(responseGeckoDto);
+
+
+        ;
+    }
+
+
+
+    private MarketPriceResponse mapGeckoDtoToPlatformPrices(CryptoMarketPriceDomainDTO responseGeckoDto){
         List<MarketPriceDomainDTO> marketGeckoPrices = Optional.ofNullable(responseGeckoDto.getMarketPrices())
                 .orElseThrow(() -> new IllegalArgumentException("⚠️ No se encontraron precios en CoinGecko."));
 
-        List<PlatformPrice> prices = new ArrayList<>();
+        List<PlatformPrice> prices = marketGeckoPrices.stream()
+                .map(marketGeckoPricesDTO -> new PlatformPrice.Builder()
+                        .plataform(marketGeckoPricesDTO.getPlatform())
+                        .price(marketGeckoPricesDTO.getPrice())
+                        .timestamp(marketGeckoPricesDTO.getTimestamp())
+                        .build())
+                .collect(Collectors.toList());
 
-        for (MarketPriceDomainDTO marketPriceDomainDTO : marketGeckoPrices) {
-            PlatformPrice platformPrice = new PlatformPrice.Builder()
-                    .plataform(marketPriceDomainDTO.getPlatform())
-                    .price(marketPriceDomainDTO.getPrice())
-                    .timestamp(marketPriceDomainDTO.getTimestamp())
-                    .build();
-            prices.add(platformPrice);
-        }
 
         return new MarketPriceResponse.Builder()
                 .cryptoId(responseGeckoDto.getCryptoId())
@@ -36,3 +46,6 @@ public class BitcoinDtoToPriceResponseMapper {
                 .build();
     }
 }
+
+
+
