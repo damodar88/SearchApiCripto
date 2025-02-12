@@ -17,32 +17,50 @@ import java.util.stream.StreamSupport;
 public class BitcoinDtoToPriceResponseMapper {
 
     public MarketPriceResponse simpleDelegateToBitcoinResponseDtoMapper(CryptoMarketPriceDomainDTO responseGeckoDto, CryptoMarketPriceDomainDTO responseBudaDto) {
+        List<PlatformPrice> geckoPrices = mapGeckoDtoToPlatformPrices(responseGeckoDto);
+        List<PlatformPrice> budaPrices = mapBudaDtoToPlatformPrices(responseBudaDto);
 
-        MarketPriceResponse coinGeckoResponse =mapGeckoDtoToPlatformPrices(responseGeckoDto);
-
-
-        return null;
-    }
-
-
-
-    private MarketPriceResponse mapGeckoDtoToPlatformPrices(CryptoMarketPriceDomainDTO responseGeckoDto){
-        List<MarketPriceDomainDTO> marketGeckoPrices = Optional.ofNullable(responseGeckoDto.getMarketPrices())
-                .orElseThrow(() -> new IllegalArgumentException("⚠️ No se encontraron precios en CoinGecko."));
-
-        List<PlatformPrice> prices = marketGeckoPrices.stream()
-                .map(marketGeckoPricesDTO -> new PlatformPrice.Builder()
-                        .plataform(marketGeckoPricesDTO.getPlatform())
-                        .price(marketGeckoPricesDTO.getPrice())
-                        .timestamp(marketGeckoPricesDTO.getTimestamp())
-                        .build())
-                .collect(Collectors.toList());
+        List<PlatformPrice> allPrices = new ArrayList<>();
+        allPrices.addAll(geckoPrices);
+        allPrices.addAll(budaPrices);
 
         return new MarketPriceResponse.Builder()
                 .cryptoId(responseGeckoDto.getCryptoId())
                 .currency(responseGeckoDto.getCurrency())
-                .prices(prices)
+                .prices(allPrices)
                 .build();
+    }
+
+    private List<PlatformPrice> mapGeckoDtoToPlatformPrices(CryptoMarketPriceDomainDTO responseGeckoDto) {
+        List<MarketPriceDomainDTO> marketGeckoPrices = Optional.ofNullable(responseGeckoDto.getMarketPrices())
+                .orElseThrow(() -> new IllegalArgumentException("⚠️ No se encontraron precios en CoinGecko."));
+
+        List<PlatformPrice> prices = new ArrayList<>();
+        for (MarketPriceDomainDTO marketPriceDomainDTO : marketGeckoPrices) {
+            PlatformPrice platformPrice = new PlatformPrice.Builder()
+                    .plataform(marketPriceDomainDTO.getPlatform())
+                    .price(marketPriceDomainDTO.getPrice())
+                    .timestamp(marketPriceDomainDTO.getTimestamp())
+                    .build();
+            prices.add(platformPrice);
+        }
+        return prices;
+    }
+
+    private List<PlatformPrice> mapBudaDtoToPlatformPrices(CryptoMarketPriceDomainDTO responseBudaDto) {
+        List<MarketPriceDomainDTO> marketBudaPrices = Optional.ofNullable(responseBudaDto.getMarketPrices())
+                .orElseThrow(() -> new IllegalArgumentException("⚠️ No se encontraron precios en Buda."));
+
+        List<PlatformPrice> prices = new ArrayList<>();
+        for (MarketPriceDomainDTO marketPriceDomainDTO : marketBudaPrices) {
+            PlatformPrice platformPrice = new PlatformPrice.Builder()
+                    .plataform(marketPriceDomainDTO.getPlatform())
+                    .price(marketPriceDomainDTO.getPrice())
+                    .timestamp(marketPriceDomainDTO.getTimestamp())
+                    .build();
+            prices.add(platformPrice);
+        }
+        return prices;
     }
 }
 
